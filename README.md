@@ -3,6 +3,11 @@
 The following is a collection of accelerated algorithms that I use in my work. These implementations are highly optimized and do not contain any checks. As such, please
 use with caution.
 
+<br/>
+
+Algorithms included in this repository thus far:
+1) [Approximate Entropy](#approximate-entropy)
+
 ---
 
 ## Approximate Entropy
