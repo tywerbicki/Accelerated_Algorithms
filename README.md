@@ -16,7 +16,7 @@ An excellent description of the *approximate entropy* algorithm can be found [he
 > `gcc apentropy.c -o test.exe -lm`
 
 **Performance Metrics**
-* Takes about *1 second* for a 10,000 element vector, m = 2, and r = 3.
+* Takes *~0.5-1 second* for a 10,000 element vector, m = 2, and r = 3.
 * About 300-500 times faster than the Wikipedia Python implementation.
 
 ---
