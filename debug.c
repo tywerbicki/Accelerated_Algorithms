@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "accel_algo.h"
+#include "cardio_algo.h"
 
 int main(void) {
 

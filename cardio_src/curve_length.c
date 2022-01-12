@@ -3,7 +3,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-#include "accel_algo.h"
+#include "../cardio_algo.h"
 
 typedef struct {
     const float* mat;

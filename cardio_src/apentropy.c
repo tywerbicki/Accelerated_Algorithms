@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-#include "accel_algo.h"
+#include "../cardio_algo.h"
 
 static const double DOUBLE_MIN = DBL_MIN;
 
