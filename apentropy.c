@@ -3,6 +3,8 @@
 #include <math.h>
 #include <stdlib.h>
 
+#include "accel_algo.h"
+
 static const double DOUBLE_MIN = DBL_MIN;
 
 typedef struct {   
@@ -133,36 +135,3 @@ double apentropy(const double *U, const int len_U, const int m, const int r) {
 
     return phi_m - phi_m1;
 }
-
-
-
-
-
-//// For debugging.
-//int main(void) {
-//
-//    const int len = 51;
-//    double *vec = (double*) malloc( sizeof(double)*len );
-//
-//    // Example from wikipedia.
-//    for (size_t i = 0; i < len; i++)
-//    {   
-//        if (i % 3 == 0)
-//        {   vec[i] = 85;    } 
-//        else {
-//            if (i % 3 == 1)
-//            {   vec[i] = 80;    }
-//            else {
-//                vec[i] = 89;
-//            }
-//        } 
-//    }
-//    
-//
-//    //double result = apentropy_slow(vec, len, 2, 3);
-//    double result2 = apentropy(vec, len, 2, 3);
-//
-//    //printf("ApEn: %f \n", result);
-//    printf("ApEn2: %f \n", result2);
-//
-//}
