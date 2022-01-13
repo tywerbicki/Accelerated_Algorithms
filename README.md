@@ -12,7 +12,7 @@ Modules included in this repository thus far:
     
 <br/>
 
-How to compile `debug*.c` source code files to ensure that the libraries are working:
+How to compile `*_debug.c` source code files to ensure that the libraries are working:
 * *cardio_debug.c*
     
     > `gcc -Wall cardio_debug.c ./src/cardio_algo/* -o test.exe -lm -lpthread`
