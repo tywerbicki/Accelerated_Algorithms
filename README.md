@@ -5,11 +5,11 @@ use with caution.
 
 <br/>
 
-Algorithms included in this repository thus far:
-* Cardiovascular Algorithms
+Modules included in this repository thus far:
+* Cardiovascular Algorithms 
     1) [Approximate Entropy](#approximate-entropy)
     2) [Curve Length](#curve-length)
-
+    
 <br/>
 
 How to compile `debug*.c` source code files to ensure that the libraries are working:
@@ -17,6 +17,11 @@ How to compile `debug*.c` source code files to ensure that the libraries are wor
     
     > `gcc -Wall cardio_debug.c ./cardio_algo_src/* -o test.exe -lm -lpthread`
          
+<br/>
+<br/>
+
+**All module header files (1 per module) are located in `./incude/`.** 
+
 ---
 
 ## Approximate Entropy
