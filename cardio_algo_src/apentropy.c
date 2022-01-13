@@ -3,15 +3,17 @@
 #include <math.h>
 #include <stdlib.h>
 
-#include "../cardio_algo.h"
+#include "../include/cardio_algo.h"
 
-static const double DOUBLE_MIN = DBL_MIN;
+static const double FLOAT_MIN = FLT_MIN;
 
+// Holds maximum distances for lengths m and m+1.
 typedef struct {   
-    double m, m1;
+    float m; 
+    float m1;
     } distances_t;
 
-static inline distances_t* d_mm1(const double *x_i, const double *x_j, const int l) {
+static inline distances_t* d_mm1(const float *x_i, const float *x_j, const int l) {
     /*
     Find distances between x_i and x_j for both m and m+1 lengths.
     Doing this simultaneously prevents any double calculation and
@@ -20,16 +22,16 @@ static inline distances_t* d_mm1(const double *x_i, const double *x_j, const int
     */
 
     distances_t *max_dists = (distances_t*) malloc( sizeof(distances_t) );
-    max_dists->m = DOUBLE_MIN;
-    double dist;
+    max_dists->m = FLOAT_MIN;
+    float dist;
     
     for (size_t i = 0; i < l - 1; i++)
     {   
-        dist = fabs( x_i[i] - x_j[i] );
+        dist = fabsf( x_i[i] - x_j[i] );
         if (dist > max_dists->m)
         {   max_dists->m = dist;    }
     }
-    dist = fabs( x_i[l-1] - x_j[l-1] );
+    dist = fabsf( x_i[l-1] - x_j[l-1] );
     if (dist < max_dists->m) {
         max_dists->m1 = max_dists->m;
     } else {
@@ -39,17 +41,17 @@ static inline distances_t* d_mm1(const double *x_i, const double *x_j, const int
     return max_dists; 
 }
 
-static inline double d(const double *x_i, const double *x_j, const int l) {
+static inline float d(const float *x_i, const float *x_j, const int l) {
     /*
     Find distances between x_i and x_j for m legnth only.
     Parameter 'l' should be set to m.
     */
 
-    double dist, max_dist = DOUBLE_MIN;
+    float dist, max_dist = FLOAT_MIN;
 
     for (size_t i = 0; i < l; i++)
     {   
-        dist = fabs( x_i[i] - x_j[i] );
+        dist = fabsf( x_i[i] - x_j[i] );
         if (dist > max_dist)
         {   max_dist = dist;    }
     }
@@ -57,7 +59,7 @@ static inline double d(const double *x_i, const double *x_j, const int l) {
     return max_dist; 
 }
 
-double apentropy(const double *U, const int len_U, const int m, const int r) {
+float apentropy(const float *U, const int len_U, const int m, const float r) {
     /*
     Calculates the approximate entropy of the vector U given hyperparameters
     m and r. 
@@ -67,12 +69,12 @@ double apentropy(const double *U, const int len_U, const int m, const int r) {
     // one additional comparison. 
     const int NUM_BIG_VEC = (len_U - m);
     // Store the number of vector distances <= r for size m.
-    double *distance_vec_m = (double*) calloc(sizeof(double), NUM_BIG_VEC + 1);
+    float *distance_vec_m = (float*) calloc(sizeof(float), NUM_BIG_VEC + 1);
     // Store the number of vector distances <= r for size m+1.
-    double *distance_vec_m1 = (double*) calloc(sizeof(double), NUM_BIG_VEC);
+    float *distance_vec_m1 = (float*) calloc(sizeof(float), NUM_BIG_VEC);
     // Initialize.
     distances_t *dists;
-    const double *x_i, *x_j;
+    const float *x_i, *x_j;
     size_t j;
 
     for (size_t i = 0; i < NUM_BIG_VEC; i++)
@@ -80,8 +82,8 @@ double apentropy(const double *U, const int len_U, const int m, const int r) {
         // First vector for distance calculation.
         x_i = U + i;
         // Distance between vector and itself is 0 < r.
-        distance_vec_m[i] += 1.0;
-        distance_vec_m1[i] += 1.0;
+        distance_vec_m[i] += 1.0F;
+        distance_vec_m1[i] += 1.0F;
         for (j = i+1; j < NUM_BIG_VEC; j++)
         {   
             // Second vector for distance calculation.
@@ -91,14 +93,14 @@ double apentropy(const double *U, const int len_U, const int m, const int r) {
             // If m-length distance <= r, record it.
             if ( dists->m <= r ) 
             {
-                distance_vec_m[i] += 1.0;
-                distance_vec_m[j] += 1.0;
+                distance_vec_m[i] += 1.0F;
+                distance_vec_m[j] += 1.0F;
             }
             // If m+1-length distance <= r, record it.  
             if ( dists->m1 <= r ) 
             {
-                distance_vec_m1[i] += 1.0;
-                distance_vec_m1[j] += 1.0;
+                distance_vec_m1[i] += 1.0F;
+                distance_vec_m1[j] += 1.0F;
             } 
             // 'dists' points to dynamically allocated memory. 
             free(dists);
@@ -108,26 +110,26 @@ double apentropy(const double *U, const int len_U, const int m, const int r) {
         x_j = U + j;
         if ( d(x_i, x_j, m) <= r )
         {
-            distance_vec_m[i] += 1.0;
-            distance_vec_m[j] += 1.0;
+            distance_vec_m[i] += 1.0F;
+            distance_vec_m[j] += 1.0F;
         }
     }
     // Distance between last m-length vector and itself is 0 < r.
-    distance_vec_m[NUM_BIG_VEC] += 1;
+    distance_vec_m[NUM_BIG_VEC] += 1.0F;
     
     // Calculate phi_m and phi_m+1.
-    double phi_m = 0.0, phi_m1 = 0.0;
+    float phi_m = 0.0, phi_m1 = 0.0;
     // Number of m-length vectors.
-    const double N_M = (double)(NUM_BIG_VEC + 1);
+    const float N_M = (float)(NUM_BIG_VEC + 1);
     // Number of m+1-length vectors.
-    const double N_M1 = (double)(NUM_BIG_VEC);
+    const float N_M1 = (float)(NUM_BIG_VEC);
 
     for (size_t i = 0; i < NUM_BIG_VEC; i++)
     {   
-        phi_m += log( distance_vec_m[i] / N_M );
-        phi_m1 += log( distance_vec_m1[i] / N_M1 );
+        phi_m += logf( distance_vec_m[i] / N_M );
+        phi_m1 += logf( distance_vec_m1[i] / N_M1 );
     }
-    phi_m += log( distance_vec_m[NUM_BIG_VEC] / N_M );
+    phi_m += logf( distance_vec_m[NUM_BIG_VEC] / N_M );
     phi_m /= N_M; phi_m1 /= N_M1;
 
     free(distance_vec_m);

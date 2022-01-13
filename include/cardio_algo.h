@@ -1,7 +1,7 @@
 #ifndef APENTROPY_H
 #define APENTROPY_H
 
-double apentropy(const double *U, const int len_U, const int m, const int r);
+float apentropy(const float *U, const int len_U, const int m, const float r);
 
 #endif
 

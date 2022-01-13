@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "cardio_algo.h"
+#include "./include/cardio_algo.h"
 
 int main(void) {
 
     // Test apentropy.
 
     const int len = 51;
-    double *vec = (double*) malloc( sizeof(double)*len );
+    float *vec = (float*) malloc( sizeof(float)*len );
 
     // Example from wikipedia.
     for (size_t i = 0; i < len; i++)
@@ -24,7 +24,7 @@ int main(void) {
         } 
     }
     
-    double result = apentropy(vec, len, 2, 3);
+    float result = apentropy(vec, len, 2, 3.0F);
     free(vec);
 
     printf("ApEn: %f \n", result);
