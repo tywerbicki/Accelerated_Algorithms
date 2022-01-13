@@ -15,7 +15,7 @@ Modules included in this repository thus far:
 How to compile `debug*.c` source code files to ensure that the libraries are working:
 * *cardio_debug.c*
     
-    > `gcc -Wall cardio_debug.c ./cardio_algo_src/* -o test.exe -lm -lpthread`
+    > `gcc -Wall cardio_debug.c ./src/cardio_algo/* -o test.exe -lm -lpthread`
          
 <br/>
 <br/>
