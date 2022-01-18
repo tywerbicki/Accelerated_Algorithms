@@ -1,7 +1,7 @@
 ##### Beginning of user-defined parameters. #####
 
 # Specify root directory of source code.
-SOURCE_DIR := ./src
+SOURCE_DIR := ./src/cardio_algo
 # Specify directories containing headers.
 INCLUDE_FLAGS := -I./include
 # Specify directory to store object files and final executable.
