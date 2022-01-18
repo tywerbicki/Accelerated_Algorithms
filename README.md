@@ -17,7 +17,11 @@ Modules included in this repository thus far:
 How to compile `*_debug.c` source code files to ensure that the libraries are working:
 * *cardio_debug.c*
     
-    1) In the makefile, set `MAIN` as follows: `MAIN := ./debug/cardio_debug.c`.
+    1) In the makefile, set the following user-defined parameters: 
+        
+        * `SOURCE_DIR := ./src/cardio_algo`
+        * `MAIN := ./debug/cardio_debug.c`
+    
     2) Run the commands below and observe results:
     
         ```
