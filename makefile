@@ -1,3 +1,5 @@
+##### Beginning of user-defined parameters. #####
+
 # Specify root directory of source code.
 SOURCE_DIR := ./src
 # Specify directories containing headers.
@@ -15,6 +17,9 @@ CC := gcc
 CFLAGS := -Wall $(INCLUDE_FLAGS) 
 # Specify linker flags.
 LDFLAGS := -lm -lpthread
+
+##### End of user-defined parameters. #####
+
 
 # Generate names of all object files.
 SOURCE_PATHS := $(shell find $(SOURCE_DIR) -name '*.c')
