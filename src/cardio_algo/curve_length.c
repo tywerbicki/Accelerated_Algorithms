@@ -3,7 +3,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-#include "../../include/cardio_algo.h"
+#include "cardio_algo.h"
 
 // Holds data that must be sent to each thread.
 typedef struct {

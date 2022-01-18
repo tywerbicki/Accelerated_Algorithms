@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-#include "../../include/cardio_algo.h"
+#include "cardio_algo.h"
 
 static const double FLOAT_MIN = FLT_MIN;
 
